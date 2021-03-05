@@ -19,14 +19,14 @@ def nike():
         productId = response[response.find('productId" content="')+20:]
         productId = productId[:productId.find('"')]
         atk = url + '/?productId=' + productId + '&size='
-        time.sleep(3)
+
         url = 'https://api.nike.com/merch/skus/v2/?filter=productId%28' + productId + '%29&filter=country%28RU%29'
         response = requests.get(url, headers={
                             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0"}).json()['objects']
         sizes = []
         for size in response:
             sizes.append(size['nikeSize'])
-        time.sleep(3)
+
         url = 'https://api.nike.com/deliver/available_gtins/v2/?filter=styleColor%28' + styleCode + '%29&filter=merchGroup%28XP%29'
         response = requests.get(url, headers={
                             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0"}).json()['objects']
@@ -36,7 +36,8 @@ def nike():
 
         stockSize = {}
         for i in range(0, len(sizes)):
-            stockSize[sizes[i]] = stocks[i]
+            try:stockSize[sizes[i]] = stocks[i]
+            except: pass
 
         res = ''
         for key, value in stockSize.items():
@@ -51,7 +52,7 @@ def nike():
                             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0"}).text
             soup = BeautifulSoup(response, 'html.parser')
             products = soup.find_all('figure', {'class': 'd-md-h ncss-col-sm-12 va-sm-t pb0-sm prl0-sm'})
-            for product in products:
+            for product in products[4:]:
                 if product.get_text() in all_items: continue
                 ptext = product.find('a', {'class': 'card-link d-sm-b'})['href']
                 ptext = ptext[13:]
@@ -61,9 +62,8 @@ def nike():
                 discord_webhook.DiscordWebhook(url=wb,
                                             content=ptext).execute()
                 all_items.append(product.get_text())
-                time.sleep(30)
-            time.sleep(60)
-        except: print(traceback.format_exc()); time.sleep(60)
+                time.sleep(1)
+        except: print(traceback.format_exc())
 
 if __name__ == '__main__':
     nike()
