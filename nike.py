@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import traceback
 import discord_webhook
+import time
 
 wb = 'https://discord.com/api/webhooks/817344618080501760/m3TA7dndamTgHYAL2YpW42izfAOhxMTrzmqrDvB9QSZg6mQiXC6T7cCkAdQXltQroXHu'
 
@@ -39,7 +40,8 @@ def nike():
 
         res = ''
         for key, value in stockSize.items():
-            res += key + ' - ' + value + ' ' + atk + key + '\n'
+            res += key + ' - ' + value + '\n'
+        res += atk + '9'
         return res
     
     #parse new items
@@ -51,14 +53,16 @@ def nike():
             products = soup.find_all('figure', {'class': 'pb2-sm va-sm-t ncss-col-sm-12 ncss-col-md-6 ncss-col-lg-4 pb4-md prl0-sm prl2-md ncss-col-sm-6 ncss-col-lg-3 pb4-md prl2-md pl1-md pr0-md d-sm-h d-md-ib'})
             for product in products:
                 if product.get_text() in all_items: continue
-                all_items.append(product.get_text())
                 ptext = product.find('h3', {'class': 'headline-5'}).get_text()
                 ptext += product.find('h6', {'class': 'headline-3'}).get_text()
                 ptext = ptext.replace('\n', ' ')
                 ptext += '\n' + product.find('p', {'class': 'headline-4'}).get_text() + ' ' + product.find('p', {'class': 'headline-1'}).get_text() + '\n'
                 ptext += stock('https://www.nike.com' + product.find('a', {'class': 'card-link d-sm-b'})['href'])
                 discord_webhook.DiscordWebhook(url=wb,
-                                            content=ptext).execute()
+                                            content=ptext[:2000]).execute()
+                all_items.append(product.get_text())
+                time.sleep(5)
+            time.sleep(5)
         except: print(traceback.format_exc())
 
 if __name__ == '__main__':
