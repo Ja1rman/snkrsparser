@@ -1,3 +1,4 @@
 discord_webhook
 pyTelegramBotAPI
 urllib3==1.25.11
+bs4
