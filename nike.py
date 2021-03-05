@@ -54,7 +54,7 @@ def nike():
                             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0"}).text
             soup = BeautifulSoup(response, 'html.parser')
             products = soup.find_all('figure', {'class': 'd-md-h ncss-col-sm-12 va-sm-t pb0-sm prl0-sm'})
-            for product in products[4:]:
+            for product in products:
                 if product.get_text() in all_items: continue
                 ptext = product.find('a', {'class': 'card-link d-sm-b'})['href']
                 ptext = ptext[13:]
@@ -64,7 +64,6 @@ def nike():
                 discord_webhook.DiscordWebhook(url=wb,
                                             content=ptext).execute()
                 all_items.append(product.get_text())
-                time.sleep(1)
         except: print(traceback.format_exc())
 
 if __name__ == '__main__':
