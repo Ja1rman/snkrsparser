@@ -40,9 +40,11 @@ def nike():
             except: pass
 
         res = ''
+        k = ''
         for key, value in stockSize.items():
             res += key + ' - ' + value + '\n'
-        res += atk + '9'
+            k = key
+        res += atk + k
         return res
     
     #parse new items
