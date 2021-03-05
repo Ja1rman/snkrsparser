@@ -59,10 +59,10 @@ def nike():
                 ptext += '\n' + product.find('p', {'class': 'headline-4'}).get_text() + ' ' + product.find('p', {'class': 'headline-1'}).get_text() + '\n'
                 ptext += stock('https://www.nike.com' + product.find('a', {'class': 'card-link d-sm-b'})['href'])
                 discord_webhook.DiscordWebhook(url=wb,
-                                            content=ptext[:2000]).execute()
+                                            content=ptext).execute()
                 all_items.append(product.get_text())
-                time.sleep(5)
-            time.sleep(5)
+                time.sleep(10)
+            time.sleep(30)
         except: print(traceback.format_exc())
 
 if __name__ == '__main__':
