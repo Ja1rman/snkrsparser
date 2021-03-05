@@ -32,5 +32,5 @@ def stock(url):
     return res
 
 if __name__ == '__main__':
-    with open('temp.txt', mode='w', encoding='utf-8') as f:
-        f.write('aaa')
+    with open('temp.txt', mode='r', encoding='utf-8') as f:
+        print(f.read())
