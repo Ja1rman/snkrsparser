@@ -11,12 +11,12 @@ import threading
 
 filePath = os.path.dirname(os.path.abspath(__file__))
 
-all_info = {"all_items": ["19 Mar Air Max 95 x Kim JonesДоступно 3/19 в 11:00 AM"], "adidas_result": ""}
-try:
-    config_path = filePath + '\\configg.json'
-    with open(config_path, encoding='utf-8') as f:
-        all_info = json.loads(f.read())
-except: pass
+all_info = {"all_items": [], "adidas_result": ""}
+#try:
+#    config_path = filePath + '\\config.json'
+#    with open(config_path, encoding='utf-8') as f:
+#        all_info = json.loads(f.read())
+#except: pass
 wb = 'https://discord.com/api/webhooks/817344618080501760/m3TA7dndamTgHYAL2YpW42izfAOhxMTrzmqrDvB9QSZg6mQiXC6T7cCkAdQXltQroXHu'
 
 def nike():
@@ -74,8 +74,8 @@ def nike():
                 ptext += stock('https://www.nike.com' + product.find('a', {'class': 'card-link d-sm-b'})['href'])
                 discord_webhook.DiscordWebhook(url=wb, content=ptext).execute()
                 all_info['all_items'].append(product.get_text())
-                with open(config_path, "w", encoding='utf-8') as f:
-                    json.dump(all_info, f, ensure_ascii=False)
+                #with open(config_path, "w", encoding='utf-8') as f:
+                #    json.dump(all_info, f, ensure_ascii=False)
         except: print(traceback.format_exc())
         time.sleep(5)
 
@@ -101,8 +101,8 @@ def adidas():
             if result != all_info['adidas_result']: 
                 discord_webhook.DiscordWebhook(url='https://discord.com/api/webhooks/821033169721360454/k53TcQxWpZXzYC3aR8O5H_chWcn2mVrw2d2ANNgHcUYvOQjpDD-2zqiFT9_LFs7MXKCO', content=result).execute()
                 all_info['adidas_result'] = result
-                with open(config_path, "w", encoding='utf-8') as f:
-                    json.dump(all_info, f, ensure_ascii=False)
+                #with open(config_path, "w", encoding='utf-8') as f:
+                #    json.dump(all_info, f, ensure_ascii=False)
         except: print(traceback.format_exc())
         time.sleep(5)
 
@@ -115,4 +115,4 @@ if __name__ == '__main__':
     threads.append(threading.Thread(target=adidas))
     threads[-1].start()
 
-#pyarmor pack -e " --onefile" --name "snkrsParser" --clean NikeBot.py
+#pyarmor pack -e " --onefile" --name "snkrsParser" --clean snkrs.py
