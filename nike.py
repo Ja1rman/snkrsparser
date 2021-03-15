@@ -11,9 +11,9 @@ import threading
 
 filePath = os.path.dirname(os.path.abspath(__file__))
 
-all_info = {"all_items": [], "adidas_result": ""}
+all_info = {"all_items": ["19 Mar Air Max 95 x Kim JonesДоступно 3/19 в 11:00 AM"], "adidas_result": ""}
 try:
-    config_path = filePath + '\\config.json'
+    config_path = filePath + '\\configg.json'
     with open(config_path, encoding='utf-8') as f:
         all_info = json.loads(f.read())
 except: pass
