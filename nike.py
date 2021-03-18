@@ -35,7 +35,9 @@ def dns():
         except: print(traceback.format_exc())
 
 dns_href = ['https://www.dns-shop.ru/product/9483d2a485eed760/videokarta-pci-e-asrock-amd-radeon-rx-6700-xt-challenger-pro-12288mb-192bit-gddr6-rx6700xt-clp-12go-hdmi-dp/',
-            'https://www.dns-shop.ru/product/75190cb578033332/videokarta-msi-amd-radeon-rx-6700-xt-mech-2x-rx-6700-xt-mech-2x-12g-oc/']
+            'https://www.dns-shop.ru/product/75190cb578033332/videokarta-msi-amd-radeon-rx-6700-xt-mech-2x-rx-6700-xt-mech-2x-12g-oc/',
+            'https://www.dns-shop.ru/product/56e4273585efd760/videokarta-pci-e-asrock-amd-radeon-rx-6700-xt-challenger-d-12288mb-192bit-gddr6-rx6700xt-cld-12g-hdmi-dp/',
+            'https://www.dns-shop.ru/product/8156e06982cc2ff0/videokarta-sapphire-amd-radeon-rx-6700-xt-pulse-gaming-11306-02-20g/']
 
 def dns_with_href():
     while True:
